@@ -92,7 +92,7 @@ void LCD_Refresh(void)
 		LCD_Cmd_Out(0);
 		LCD_Cmd_Out(0x10);
 		
-	for(x=0; x<128; x++)
+    for(x=0; x<128; x++)
 			LCD_Dat_Out(LCDmat[y*128+x]);
 	}
 }

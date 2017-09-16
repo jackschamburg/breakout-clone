@@ -27,20 +27,23 @@ void SetupTimer1A(void)
 	TIMER1_CTL 			|= 1;
 }
 
-void SetupTimer2A(void)
+void SetupTimer0A(void)
 {
-	SYSCTL_RCGTIMER |= 4;
-	while ((SYSCTL_PRTIMER & 4) != 4);
+	SYSCTL_RCGTIMER |= 1;
+	while ((SYSCTL_PRTIMER & 1) != 1);
 	
-	TIMER2_CTL 			&= ~1;
-	TIMER2_CTL			&= ~40;
-	TIMER2_CFG 			|= 4;
-	TIMER2_TAMR 		|= 0xA;
-	TIMER2_TAMATCH	&= ~5;
-	TIMER2_TAILR		 = 0xFFFF;
-	TIMER2_TAMATCH 	 = 0xFFFE;
-	TIMER2_TAMR 		&= ~0x200;
-	TIMER2_CTL 			|= 1;
+	TIMER0_CTL 			&= ~1;
+	TIMER0_CTL			&= ~0x48;
+	TIMER0_CTL			|= 4;
+	TIMER0_CFG 			|= 0x4;
+	TIMER0_TAMR 		|= 0xA;
+	TIMER0_TAMR			&= ~0x265;
+	TIMER0_TAILR		 = 0xFFFE;
+	//TIMER0_TAPR			 = 0xFFFF;
+	TIMER0_TAMATCH 	 = 0xAE00;
+	//TIMER0_TAPMR		 = 0xFFFF;
+	TIMER0_TAMR 		&= ~0x200;
+	TIMER0_CTL 			|= 1;
 }
 
 void SetupGPIOF(void)
@@ -48,48 +51,39 @@ void SetupGPIOF(void)
 	// setup clock
 	SYSCTL_RCGCGPIO |= 0x20;
 	while ( (SYSCTL_PRGPIO & 0x20) != 0x20);
-	
-	// unlock button
-	GPIOF_LOCK  = 0x4C4F434B;
-	GPIOF_CR   |= 0x1;
-	
+
 	// set direction for pins
-	GPIOF_DIR &= ~0x10;
-	GPIOF_DIR |= 0xF;
-	
-	GPIOF_PUR  |= 0x11;
-	GPIOF_DR4R |= 0x11;
+	GPIOF_DIR |= 1;
 	
 	// set alternate functions
-	GPIOF_AFSEL &= ~0x1B;
-	GPIOF_AFSEL |= 4;
+	GPIOF_AFSEL |= 1;
 	
 	// set port control
-	GPIOF_PCTL |= 0x700;
+	GPIOF_PCTL |= 7;
 	
 	// turn on digital enable
-	GPIOF_DEN |= 0x1F;
+	GPIOF_DEN |= 1;
 }
 
 
-//void SetupGPIOB(void)
-//{
-//	// setup clock
-//	SYSCTL_RCGCGPIO |= 0x2;
-//	while ( (SYSCTL_PRGPIO & 0x2) != 0x2);
-//	
-//	// set direction for pins
-//	GPIOB_DIR |= 0x40;
-//	
-//	// set alternate functions
-//	GPIOB_AFSEL |= 0x40;
-//	
-//	// set port control
-//	GPIOB_PCTL |= 0x4000000;
-//	
-//	// turn on digital enable
-//	GPIOB_DEN |= 0x40;
-//}
+void SetupGPIOB(void)
+{
+	// setup clock
+	SYSCTL_RCGCGPIO |= 0x2;
+	while ( (SYSCTL_PRGPIO & 0x2) != 0x2);
+	
+	// set direction for pins
+	GPIOB_DIR |= 0x40;
+	
+	// set alternate functions
+	GPIOB_AFSEL |= 0x40;
+	
+	// set port control
+	GPIOB_PCTL |= 0x7000000;
+	
+	// turn on digital enable
+	GPIOB_DEN |= 0x40;
+}
 
 void audioTest(void) 
 {

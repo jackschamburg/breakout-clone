@@ -18,7 +18,7 @@ int main(void)
 	SetupGameEnvironment();
 	
 	SetupGPIOB();
-	SetupTimer2A();
+	SetupTimer0A();
 	//setupSystick();
 	
 	// START GAME
