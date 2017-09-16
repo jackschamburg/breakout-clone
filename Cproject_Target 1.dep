@@ -1,0 +1,17 @@
+Dependencies for Project 'Cproject', Target 'Target 1': (DO NOT MODIFY !)
+F (.\Startup.s)(0x59BBD78D)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123--pd "__UVISION_VERSION SETA 523" --pd "_RTE_ SETA 1" --pd "TM4C123GH6PM SETA 1"--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
+F (.\main.c)(0x59BC88E0)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="523" -D_RTE_ -DTM4C123GH6PM-o .\main.o --omf_browse .\main.crf --depend .\main.d)
+I (registers.h)(0x59BC88D6)
+I (LCDsetup.h)(0x59B90A63)
+I (timersetup.h)(0x59BC8B97)
+I (game.h)(0x59BBBBCE)
+F (.\LCDsetup.c)(0x59BBCAEC)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="523" -D_RTE_ -DTM4C123GH6PM-o .\lcdsetup.o --omf_browse .\lcdsetup.crf --depend .\lcdsetup.d)
+I (LCDsetup.h)(0x59B90A63)
+I (registers.h)(0x59BC88D6)
+F (.\timersetup.c)(0x59BC8B7C)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="523" -D_RTE_ -DTM4C123GH6PM-o .\timersetup.o --omf_browse .\timersetup.crf --depend .\timersetup.d)
+I (timersetup.h)(0x59BC8B97)
+I (registers.h)(0x59BC88D6)
+F (.\game.c)(0x59BBCB0B)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="523" -D_RTE_ -DTM4C123GH6PM-o .\game.o --omf_browse .\game.crf --depend .\game.d)
+I (registers.h)(0x59BC88D6)
+I (LCDsetup.h)(0x59B90A63)
+I (game.h)(0x59BBBBCE)

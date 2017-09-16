@@ -1,0 +1,10 @@
+Dependencies for Project 'Cprojects', Target 'Target 1': (DO NOT MODIFY !)
+F (.\Startup.s)(0x57DB1662)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123--pd "__UVISION_VERSION SETA 523" --pd "_RTE_ SETA 1" --pd "TM4C123GH6PM SETA 1"--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
+F (.\main.c)(0x59B7367D)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="523" -D_RTE_ -DTM4C123GH6PM-o .\main.o --omf_browse .\main.crf --depend .\main.d)
+I (registers.h)(0x59B685E9)
+I (setup.h)(0x59B730B2)
+F (.\general.c)(0x59B73663)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="523" -D_RTE_ -DTM4C123GH6PM-o .\general.o --omf_browse .\general.crf --depend .\general.d)
+I (registers.h)(0x59B685E9)
+F (.\setup.c)(0x59B73783)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="523" -D_RTE_ -DTM4C123GH6PM-o .\setup.o --omf_browse .\setup.crf --depend .\setup.d)
+I (registers.h)(0x59B685E9)
+I (setup.h)(0x59B730B2)
