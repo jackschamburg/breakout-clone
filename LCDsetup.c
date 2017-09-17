@@ -153,6 +153,6 @@ unsigned char LCDstate(unsigned char x, unsigned char y)
 		y -= 32;
 	y--;
 
-	return (LCDmat[x + (y/8) * 128] & (1 << (y%8)));
+	return ((LCDmat[x + (y/8) * 128] & (1 << (y%8))) >> (y%8));
 	
 }

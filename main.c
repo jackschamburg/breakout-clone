@@ -1,11 +1,12 @@
 #include "registers.h"
 #include "LCDsetup.h"
 #include "timersetup.h"
+#include "ADCsetup.h"
 #include "game.h"
 
 int main(void)
 {
-	SetupGPIOF();
+ 	SetupGPIOF();
 	__asm("CPSID I");
 	SetupInterrupts();
 	__asm("CPSIE I");
@@ -14,12 +15,15 @@ int main(void)
 	LCD_Init();
 	LCD_Blank();
 	
+	SetupADC();
+	
+	
 	// setup blocks
 	SetupGameEnvironment();
 	
-	SetupGPIOB();
-	SetupTimer0A();
-	//setupSystick();
+	//setup audio
+	//SetupGPIOB();
+	//SetupTimer0A();
 	
 	// START GAME
 	SetupTimer1A(); 
@@ -29,6 +33,7 @@ int main(void)
 	{
 		//GameEngine();
 		LCD_Refresh();
+		ADC1_PSSI |= 2;
 		//Delay(20);
 	}
 }

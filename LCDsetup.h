@@ -31,3 +31,5 @@ void LCD_Blank(void);
 void LCD_Pixel(unsigned char x, unsigned char y, unsigned char colour);
 
 void Setup_LCD_GPIO(void);
+
+unsigned char LCDstate(unsigned char x, unsigned char y);

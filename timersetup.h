@@ -4,7 +4,7 @@ void SetupInterrupts(void);
 
 void SetupTimer1A(void);
 
-void SetupTimer2A(void);
+void SetupTimer0A(void);
 
 void SetupGPIOF(void);
 

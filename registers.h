@@ -75,7 +75,17 @@
 	
 #define SYSCTL_RCGTIMER	(*((volatile unsigned long *)0x400FE604))	
 #define SYSCTL_PRTIMER	(*((volatile unsigned long *)0x400FEA04))	
-	
+
+#define TIMER0_TAMATCH 	(*((volatile unsigned long *)0x40030030))
+#define TIMER0_CTL 			(*((volatile unsigned long *)0x4003000C))
+#define TIMER0_CFG			(*((volatile unsigned long *)0x40030000))
+#define TIMER0_TAMR			(*((volatile unsigned long *)0x40030004))
+#define TIMER0_TAPR			(*((volatile unsigned long *)0x40030038))
+#define TIMER0_TAILR		(*((volatile unsigned long *)0x40030028))
+#define TIMER0_TAPMR		(*((volatile unsigned long *)0x40030040))
+#define TIMER0_ICR			(*((volatile unsigned long *)0x40030024))
+#define TIMER0_IMR			(*((volatile unsigned long *)0x40030018))
+
 #define TIMER1_TAMATCH 	(*((volatile unsigned long *)0x40031030))
 #define TIMER1_CTL 			(*((volatile unsigned long *)0x4003100C))
 #define TIMER1_CFG			(*((volatile unsigned long *)0x40031000))
@@ -95,3 +105,15 @@
 #define TIMER2_TAPMR		(*((volatile unsigned long *)0x40032040))
 #define TIMER2_ICR			(*((volatile unsigned long *)0x40032024))
 #define TIMER2_IMR			(*((volatile unsigned long *)0x40032018))
+
+#define SYSCTL_RCGCADC 	(*((volatile unsigned long *)0x400FE638))
+#define SYSCTL_PRADC 		(*((volatile unsigned long *)0x400FEA38))	
+#define ADC1_ACTSS 			(*((volatile unsigned long *)0x40039000))
+#define ADC1_PC					(*((volatile unsigned long *)0x40039FC4))
+#define ADC1_SSMUX1			(*((volatile unsigned long *)0x40039060))
+#define ADC1_EMUX				(*((volatile unsigned long *)0x40039014))
+#define ADC1_SSCTL1 		(*((volatile unsigned long *)0x40039064))
+#define ADC1_IM		 			(*((volatile unsigned long *)0x40039008))	
+#define ADC1_ISC	 			(*((volatile unsigned long *)0x4003900C))
+#define ADC1_PSSI 			(*((volatile unsigned long *)0x40039028))
+#define ADC1_SSFIFO1		(*((volatile unsigned long *)0x40039068))
