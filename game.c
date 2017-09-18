@@ -4,7 +4,9 @@
 
 // GLOBAL VARIABLES
 struct Block blocks[20];
-struct Paddle paddle = {58,61,70,62, 0x1F};
+struct Paddle paddle = {58,61,72,62, 0x1F};
+struct Ball ball = {8, 50, 2, (char)-2};
+unsigned char beepCount = 0;
 
 void Delay(unsigned int Ms)
 {
@@ -21,7 +23,7 @@ void SetupGameEnvironment(void)
 	unsigned char x,y, bid = 0;
 	// create blocks in structs
 	for ( y = 6; y < 20; y += 10 )
-		for ( x = 6; x < 122; x += 12 )
+		for ( x = 8; x < 122; x += 12 )
 		{
 			blocks[bid].x1 = x;
 			blocks[bid].y1 = y;
@@ -42,8 +44,12 @@ void SetupGameEnvironment(void)
 
 void GameEngine(void)
 {
-	static struct Ball ball = {8, 59, 2, (char)-2};
+
+	// variable to store location of collision
+	unsigned char block_hit_x=0, block_hit_y=0;
 	
+	// Turn off sound
+	TIMER0_CTL &= ~1;
 	
 	// Delete old paddle
 	for(int b=paddle.y1; b<=paddle.y2; b++)
@@ -54,12 +60,15 @@ void GameEngine(void)
 		}
 	}
 	
-	if ( paddle.x_dir < 5 )
+	// move paddle left
+	if ( paddle.x_dir < 10 && paddle.x1-4 >= 1)
 	{
 		paddle.x1 -= 4;
 		paddle.x2 -= 4;
 	}
-	else if ( paddle.x_dir > 47 )
+	
+	// move paddle left
+	else if ( paddle.x_dir > 47 && paddle.x2+4 <= 128 )
 	{
 		paddle.x1 += 4;
 		paddle.x2 += 4;
@@ -83,12 +92,22 @@ void GameEngine(void)
 	// check if next to wall
 	if ( ball.x+2 >= 128 || ball.x-1 <= 1 )
 		ball.x_speed *= -1;
-	if ( ball.y+2 >= 64  || ball.y-1 <= 1 )
+	if ( ball.y-1 <= 1 )
 		ball.y_speed *= -1;
+	if ( ball.y+2 >= 64 )
+	{
+		// out of bounds -- game over 
+		TIMER0_TAMATCH 	 = 0xE000;
+		TIMER1_CTL &= ~1;
+		TIMER0_CTL |= 1;
+		Delay(20);
+		TIMER0_CTL &= ~1;
+		if ( ++beepCount >= 3 )
+			GPIOB_DEN &= ~0x40;
+		goto end;
+	}
 	
-	// check if next to block in direction its going
-	unsigned char block_hit_x=0, block_hit_y=0;
-	
+	// ball collision detection
 	if ( LCDstate(ball.x, ball.y+2) )
 	{
 		ball.y_speed *= -1;
@@ -117,7 +136,10 @@ void GameEngine(void)
 	// if ball hit block, delete block
 	if ( block_hit_x || block_hit_y )
 	{
-		// find out which ball it is
+		// turn on sound for collision
+		TIMER0_CTL |= 1;
+		
+		// find out which ball it was
 		int i;
 		for ( i=0; i<20; i++ )
 		{
@@ -125,7 +147,7 @@ void GameEngine(void)
 				if ( (block_hit_y >= blocks[i].y1) && (block_hit_y <= blocks[i].y2) )
 					break;
 		}
-		//
+		// remove block from screen
 		int j,k;
 		for(j=blocks[i].y1; j<=blocks[i].y2; j++)
 			for(k=blocks[i].x1; k<=blocks[i].x2; k++)
@@ -134,7 +156,7 @@ void GameEngine(void)
 			}
 	}
 
-	// update location	
+	// update ball location	
 	ball.x += ball.x_speed;
 	ball.y += ball.y_speed;
 	
@@ -144,12 +166,45 @@ void GameEngine(void)
 	LCD_Pixel(ball.x, 	ball.y+1, 1);
 	LCD_Pixel(ball.x+1, ball.y+1, 1);
 	
+	// tell timer we're done with interrupt
 	TIMER1_ICR |= 0x11;
+	end:;
 }
 
 void Joystick_X_ISR(void)
 {
-	static int dbug = 0;
-	dbug = paddle.x_dir = ADC1_SSFIFO1;
+	//static int dbug = 0;
+	paddle.x_dir = ADC1_SSFIFO1;
 	ADC1_ISC |= 0x2;
 }
+
+void RestartGame(void)
+{
+	TIMER1_CTL &= ~1;
+	LCD_Pixel(ball.x, 	ball.y, 	0);
+	LCD_Pixel(ball.x+1, ball.y, 	0);
+	LCD_Pixel(ball.x, 	ball.y+1, 0);
+	LCD_Pixel(ball.x+1, ball.y+1, 0);
+	
+	
+	int y;
+	for(y=5;y<40;y++)
+	{
+		LCD_Pixel(128, y, 	0);
+		LCD_Pixel(128, y, 	0);
+		LCD_Pixel(128, y, 0);
+		LCD_Pixel(128, y, 0);
+	}
+	LCD_Pixel(129,1,1);
+	
+	SetupGameEnvironment();
+	ball.x = 8;
+	ball.y = 50;
+	ball.x_speed = 2;
+	ball.y_speed = (char)-2;
+	//change paddle position
+	GPIOB_DEN |= 0x40;
+	GPIOF_ICR  |= 0x11;
+	TIMER1_CTL |= 1;
+}
+

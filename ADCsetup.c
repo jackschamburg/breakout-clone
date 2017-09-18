@@ -17,7 +17,7 @@ void SetupADC(void)
 	
 	//ADC Setup
 	ADC1_ACTSS	&= ~2;
-	ADC1_PC			 =  1;
+	ADC1_PC			 =  7;
 	ADC1_SSMUX1  =  1;
 	ADC1_EMUX		 =  0;
 	ADC1_SSCTL1 |=  6;

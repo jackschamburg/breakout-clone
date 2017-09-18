@@ -2,38 +2,42 @@
 #include "LCDsetup.h"
 #include "timersetup.h"
 #include "ADCsetup.h"
+#include "Buttonsetup.h"
 #include "game.h"
+
+//extern unsigned char inBounds;
 
 int main(void)
 {
- 	SetupGPIOF();
-	__asm("CPSID I");
-	SetupInterrupts();
-	__asm("CPSIE I");
-	
+	//setup LCD
 	Setup_LCD_GPIO();
 	LCD_Init();
 	LCD_Blank();
 	
+	//setup joystick
 	SetupADC();
 	
+	//setup audio
+	SetupGPIOB();
+	SetupTimer0A();
+	
+	//setup restart button
+	SetupButton();
 	
 	// setup blocks
 	SetupGameEnvironment();
 	
-	//setup audio
-	//SetupGPIOB();
-	//SetupTimer0A();
-	
-	// START GAME
+	//START GAME
 	SetupTimer1A(); 
-	
-	// While not updating the game
+		
+	// game loop
 	while(1)
 	{
 		//GameEngine();
 		LCD_Refresh();
 		ADC1_PSSI |= 2;
-		//Delay(20);
 	}
+	
+	// spin on spot
+	while(1);
 }

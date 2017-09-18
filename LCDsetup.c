@@ -118,7 +118,7 @@ void LCD_Pixel(unsigned char x, unsigned char y, unsigned char colour)
 	y--;
 
 	if(colour == 1)
-		LCDmat[x + (y/8) * 128] |= (1 << (y%8));
+		LCDmat[x + (y/8) * 128] |=  (1 << (y%8));
   else
 		LCDmat[x + (y/8) * 128] &= ~(1 << (y%8));
 }
@@ -140,7 +140,6 @@ void Setup_LCD_GPIO(void)
 	GPIOE_DIR    |=  0x38;
 	GPIOE_AFSEL  &= ~0x38;
 	GPIOE_DEN    |=  0x38;
-	
 }
 
 unsigned char LCDstate(unsigned char x, unsigned char y)
